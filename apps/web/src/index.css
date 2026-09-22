@@ -1,0 +1,199 @@
+/* Inter, servida LOCALMENTE desde el paquete npm. Nada de CDN: la app se
+   usa en estudios contables con conexiones irregulares, y una fuente que
+   tarda deja la pantalla saltando. */
+@import '@fontsource-variable/inter';
+@import 'tailwindcss';
+
+/* =====================================================================
+   Sistema de diseño de Planix.
+
+   Tailwind 4 se configura desde CSS: lo que se declara en @theme genera
+   las utilidades (bg-primario, text-texto-suave, rounded-tarjeta…). Los
+   colores se usan SIEMPRE por token — un `#4F46E5` suelto en un
+   componente es deuda de mantenimiento, no un detalle.
+
+   La identidad es índigo/violeta: seria para un producto que maneja
+   dinero ajeno, pero moderna.
+   ===================================================================== */
+
+@theme {
+  /* ---- Marca ---- */
+  --color-primario: #4f46e5;
+  --color-primario-oscuro: #4338ca;
+  --color-primario-suave: #eef2ff;
+  --color-acento: #8b5cf6;
+
+  /* ---- Semánticos (estado de un dato, nunca decoración) ----
+
+     AJUSTE DE CONTRASTE: los tonos pedidos (#059669, #D97706, #0284C7)
+     dan 3.77:1, 3.19:1 y 4.10:1 sobre blanco — por debajo del 4.5:1 que
+     exige la AA para texto normal, y estos colores se usan sobre todo
+     COMO TEXTO (badges, importes, avisos). Se bajaron un escalón hasta
+     el primer valor que cumple; el matiz es el mismo y la diferencia
+     apenas se nota, pero ahora se leen. El peligro (#E11D48, 4.70:1) y
+     el primario (#4F46E5, 6.29:1) se quedaron tal cual. */
+  --color-exito: #047857; /* 5.48:1 */
+  --color-exito-suave: #ecfdf5;
+  --color-advertencia: #b45309; /* 5.02:1 */
+  --color-advertencia-suave: #fffbeb;
+  --color-peligro: #e11d48; /* 4.70:1 */
+  --color-peligro-suave: #fff1f2;
+  --color-info: #0369a1; /* 5.93:1 */
+  --color-info-suave: #f0f9ff;
+
+  /* ---- Superficies ---- */
+  --color-fondo: #f8fafc;
+  --color-superficie: #ffffff;
+  --color-borde: #e2e8f0;
+  --color-borde-fuerte: #cbd5e1;
+
+  /* ---- Navegación: superficie OSCURA ----
+
+     El sidebar y el contenido eran los dos claros y se confundían. La
+     navegación pasa a ser una superficie oscura tintada de índigo: da
+     jerarquía (el trabajo ocurre en la zona clara) y el carácter
+     tecnológico del producto.
+
+     ELECCIÓN DEL FONDO: entre los dos candidatos se tomó #1E1B3A y no
+     #1B1A2E. El degradado del panel del login va de #4338CA a #7C3AED
+     (matiz 248→267); #1E1B3A está en 246° con 53% de saturación, así que
+     se lee como el mismo violeta apagado, mientras que #1B1A2E (243°,
+     43%) tira a gris azulado y rompe el parentesco con la marca.
+
+     Los tonos translúcidos que pedía la especificación se guardan ya
+     COMPUESTOS sobre el fondo: el <select> nativo del selector de empresa
+     necesita un color opaco para que su lista despliegue legible, y así
+     además el token dice exactamente qué se pinta. La equivalencia está
+     anotada en cada línea. */
+  --color-nav: #1e1b3a;
+  --color-nav-superficie: #292644; /* blanco 5% sobre el fondo */
+  --color-nav-hover: #2c2946; /* blanco 6% */
+  --color-nav-borde: #302d4a; /* blanco 8% */
+  --color-nav-activo: #2a295b; /* #6366F1 al 18% */
+  --color-nav-barra: #6366f1; /* barra de 3px del ítem activo */
+
+  /* Texto sobre --color-nav. Medido con el mismo criterio AA que el resto
+     de la paleta: el #64748B que pedía la especificación para los
+     encabezados de grupo da 3.47:1 sobre #1E1B3A — por debajo del 4.5:1 y
+     justo en el elemento que tiene que ORDENAR la lista. Se sube a
+     #94A3B8 (6.43:1), que sigue siendo un gris medio y encima separa
+     mejor los grupos, que era la intención del pedido. */
+  --color-nav-texto: #cbd5e1; /* 11.11:1 */
+  --color-nav-encabezado: #94a3b8; /* 6.43:1 */
+  --color-nav-activo-texto: #a5b4fc; /* 6.72:1 sobre el ítem activo */
+  --color-nav-foco: #a5b4fc; /* el índigo del foco se pierde en oscuro */
+
+  /* ---- Texto ---- */
+  --color-texto: #0f172a; /* 17.9:1 */
+  --color-texto-suave: #475569; /* 7.58:1 */
+  /* El #94A3B8 pedido da 2.56:1 sobre blanco: ilegible para mucha gente y
+     lejos de la AA. Este es el tono más claro que llega a 4.5:1, y aquí
+     importa porque el "terciario" acaba llevando fechas, unidades y
+     ayudas que sí hay que poder leer. */
+  --color-texto-tenue: #64748b; /* 4.76:1 */
+
+  /* ---- Tipografía ---- */
+  --font-sans:
+    'Inter Variable', 'Inter', ui-sans-serif, system-ui, -apple-system,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  /* Escala: títulos 24/20/16, cuerpo 14, apoyo y tabla 13 */
+  --text-titulo: 1.5rem; /* 24px */
+  --text-titulo--line-height: 2rem;
+  --text-subtitulo: 1.25rem; /* 20px */
+  --text-subtitulo--line-height: 1.75rem;
+  --text-seccion: 1rem; /* 16px */
+  --text-seccion--line-height: 1.5rem;
+  --text-cuerpo: 0.875rem; /* 14px */
+  --text-cuerpo--line-height: 1.375rem;
+  --text-apoyo: 0.8125rem; /* 13px */
+  --text-apoyo--line-height: 1.25rem;
+  --text-etiqueta: 0.6875rem; /* 11px: encabezados de grupo */
+  --text-etiqueta--line-height: 1rem;
+
+  /* ---- Radios ---- */
+  --radius-control: 0.5rem; /* 8px: botones, inputs, badges */
+  --radius-tarjeta: 0.625rem; /* 10px: tarjetas y modales */
+
+  /* ---- Sombras: muy suaves, nada de marcadas ---- */
+  --shadow-tarjeta:
+    0 1px 2px 0 rgb(15 23 42 / 0.04), 0 1px 3px 0 rgb(15 23 42 / 0.06);
+  --shadow-elevada:
+    0 4px 6px -1px rgb(15 23 42 / 0.07), 0 2px 4px -2px rgb(15 23 42 / 0.05);
+  --shadow-flotante:
+    0 10px 15px -3px rgb(15 23 42 / 0.08), 0 4px 6px -4px rgb(15 23 42 / 0.05);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    font-family: var(--font-sans);
+    font-size: var(--text-cuerpo);
+    line-height: var(--text-cuerpo--line-height);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Foco visible SIEMPRE por teclado. Con :focus-visible no molesta al
+     ratón, pero quien navega con tabulador nunca se pierde. */
+  :focus-visible {
+    outline: 2px solid var(--color-primario);
+    outline-offset: 2px;
+  }
+
+  /* Sobre la navegación oscura el índigo del foco casi desaparece
+     (1.9:1 contra #1E1B3A): quien tabula perdería el rastro justo en el
+     menú. Se cambia por el índigo claro, que da 8.3:1. */
+  [data-tema='oscuro'] :focus-visible {
+    outline-color: var(--color-nav-foco);
+  }
+
+  /* La lista desplegada de un <select> nativo NO hereda de forma fiable
+     el color del control: si se deja al fondo oscuro, Chrome pinta texto
+     oscuro sobre oscuro. Las opciones se fuerzan a la superficie clara. */
+  [data-tema='oscuro'] select option {
+    background-color: var(--color-superficie);
+    color: var(--color-texto);
+  }
+
+  /* Quien pida menos movimiento, lo recibe */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Cifras de ANCHO FIJO: sin esto una columna de montos baila al cambiar
+     de dígito y comparar de un vistazo se vuelve imposible. Es lo primero
+     que nota alguien acostumbrado a Excel. */
+  .cifras {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum';
+  }
+
+  /* Malla tenue del panel de marca del login */
+  .textura-marca {
+    background-image: radial-gradient(
+      circle at 1px 1px,
+      rgb(255 255 255 / 0.18) 1px,
+      transparent 0
+    );
+    background-size: 22px 22px;
+  }
+
+  .transicion {
+    transition-property:
+      color, background-color, border-color, box-shadow, opacity, transform;
+    transition-duration: 150ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}

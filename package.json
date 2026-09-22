@@ -1,0 +1,16 @@
+{
+  "name": "planix-web",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Frontend React de Planix — sistema de gestión de planillas de sueldos",
+  "packageManager": "pnpm@11.11.0",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @planix/web dev",
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint",
+    "preview": "pnpm --filter @planix/web preview"
+  }
+}

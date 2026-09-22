@@ -1,0 +1,8 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+
+# esbuild trae un binario nativo y necesita ejecutar su script de
+# instalación; sin esto pnpm 11 lo bloquea y Vite no arranca.
+allowBuilds:
+  esbuild: true
